@@ -1,9 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import * as jwt from 'jwt-decode'
+import { setAuth } from '../actions/user'
 
-const RequireAuth = ({ children }) => {
+// None of the authenticaed routes are attempting to display therefore, RequireAuth never runs
+
+const RequireAuth = (props) => {
     const token = localStorage.getItem('authToken')
+    console.log(props)
 
     if (!token) {
         console.log('no authToken')
@@ -17,7 +22,17 @@ const RequireAuth = ({ children }) => {
         return <Redirect to='/login' />
     }
 
-    return children
+    props.dispatch(setAuth({authToken: token}))
+    console.log(props)
+    return props.children
 }
 
-export default RequireAuth
+export default connect( (state) => {
+    return {
+        user: state.user
+    }
+})(RequireAuth)
+
+// export default RequireAuth
+
+

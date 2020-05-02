@@ -6,9 +6,12 @@ const defaultUser = {
 const userReducer = (state = defaultUser, action) => {
     switch(action.type) {
         case 'SET_AUTH':
-            return {authToken: action.authToken}
+            if( state.authToken !== action.authToken) {
+                return {...state, authToken: action.authToken}
+            }
+            return state
         case 'REMOVE_AUTH':
-            return {authToken: ''}
+            return {...state, authToken: ''}
         default:
             return state
     }

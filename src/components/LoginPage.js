@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, withRouter, Redirect} from 'react-router-dom'
 import axios from 'axios'
+import { setAuth } from '../actions/user'
 
 export class LoginPage extends Component {
     constructor(props) {
@@ -15,18 +17,26 @@ export class LoginPage extends Component {
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
         e.preventDefault()
         const {email, password} = this.state
+        
         axios.post('http://localhost:8080/users/login', {email, password})
             .then(response => {
                 this.setState({error: ''})
-                console.log(response.data)
                 localStorage.setItem('authToken', response.data.token)
+                this.props.history.push('/profile')
+                this.props.dispatch(setAuth({authToken: response.data}))
             })
-            .catch(error => this.setState({error: error.response.data.error}))
+            .catch(error => {
+                console.log(error)
+                this.setState({error: error.response.data.error})
+        })
     }
     render() {
+        if(this.props.user.authToken) {
+            return <Redirect to='/' />
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
@@ -54,4 +64,12 @@ export class LoginPage extends Component {
     }
 }
 
-export default LoginPage
+export default connect((state) => {
+    return {
+        user: state.user
+    }
+})(withRouter(LoginPage))
+
+// export default LoginPage
+
+
