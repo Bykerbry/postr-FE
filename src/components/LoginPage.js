@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, Redirect} from 'react-router-dom'
-import axios from 'axios'
-import { setAuth } from '../actions/user'
+import loginUser from '../services/loginUser'
+
 
 export class LoginPage extends Component {
     constructor(props) {
@@ -20,19 +20,13 @@ export class LoginPage extends Component {
     handleSubmit = async (e) => {
         e.preventDefault()
         const {email, password} = this.state
-        
-        axios.post('http://localhost:8080/users/login', {email, password})
-            .then(response => {
-                this.setState({error: ''})
-                localStorage.setItem('authToken', response.data.token)
-                this.props.history.push('/profile')
-                this.props.dispatch(setAuth({authToken: response.data}))
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({error: error.response.data.error})
-        })
+        loginUser({email, password}, this.props)
     }
+
+    // Below is required in place of componnentWillRecieveProps()
+    // getDerivedStateFromProps(nextProps, prevState){ if change component did update will be called }
+    // componentDidUpdate(prevProps, prevState) { setState can then be called here }
+
     render() {
         if(this.props.user.authToken) {
             return <Redirect to='/' />
@@ -70,6 +64,5 @@ export default connect((state) => {
     }
 })(withRouter(LoginPage))
 
-// export default LoginPage
 
 

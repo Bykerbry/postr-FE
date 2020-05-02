@@ -1,6 +1,7 @@
 
 const defaultUser = {
-    authToken: ''
+    authToken: '',
+    info: null
 }
 
 const userReducer = (state = defaultUser, action) => {
@@ -12,6 +13,10 @@ const userReducer = (state = defaultUser, action) => {
             return state
         case 'REMOVE_AUTH':
             return {...state, authToken: ''}
+        case 'SET_USER':
+            return {...state, info: action.info}
+        case 'REMOVE_USER':
+            return {...state, info: null}
         default:
             return state
     }

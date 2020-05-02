@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import * as jwt from 'jwt-decode'
-import { setAuth } from '../actions/user'
+import { setAuth } from '../actions/userActions'
 
 // None of the authenticaed routes are attempting to display therefore, RequireAuth never runs
 

@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import * as jwt from 'jwt-decode'
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore'
-import { removeAuth, setAuth } from './actions/user';
+import { removeAuth, setAuth } from './actions/userActions';
 
 const store = configureStore()
 store.subscribe( () => console.log(store.getState()))
