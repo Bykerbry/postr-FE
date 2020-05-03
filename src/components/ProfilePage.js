@@ -1,11 +1,33 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import readPosts from '../services/posts/loadUserPosts'
 
-
-const ProfilePage = (props) => (
-    <p>Welcome {props.user.info.firstName}!</p>
-)
+export class ProfilePage extends Component {
+    constructor(props) {
+        super(props)
+    }
+    
+    render() {
+        return (
+            <div>
+                <p>Welcome {this.props.user.info.firstName}!</p>
+                <button onClick={() => readPosts(this.props)}>See Posts</button>
+                {
+                    this.props.posts.length 
+                    &&
+                    this.props.posts.map(post => (
+                        <div key={post._id}>
+                            <h3>{post.title}</h3>
+                            <p>{post.body}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+}
 
 export default connect(state => ({
-    user: state.user
+    user: state.user,
+    posts: state.posts
 }))(ProfilePage)

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { setUser, setAuth } from '../../actions/userActions'
 import { setError } from '../../actions/errorActions'
 
-const readUser = (token, { dispatch }) => {
+const readUser = (token, dispatch) => {
     axios.defaults.headers.common['Authorization'] = token
     axios.get('http://localhost:8080/users/me')
         .then(response => {
