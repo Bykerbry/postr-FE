@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 
-const ProfilePage = () => (
-    <p>ProfilePage Works!</p>
+const ProfilePage = (props) => (
+    <p>Welcome {props.user.info.firstName}!</p>
 )
 
-export default ProfilePage
+export default connect(state => ({
+    user: state.user
+}))(ProfilePage)

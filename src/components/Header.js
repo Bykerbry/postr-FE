@@ -1,14 +1,10 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { removeAuth } from '../actions/userActions';
-import logoutUser from '../services/logoutUser';
+import logoutUser from '../services/users/logoutUser';
 
 
-const Header = (props) => {
-    console.log(props)
-    return (
-    
+const Header = (props) => (
     <div>
         <nav>
             { props.user.authToken ? (
@@ -16,9 +12,7 @@ const Header = (props) => {
                     <NavLink to="/">Profile</NavLink>
                     <NavLink to="/feed">Feed</NavLink>          
                     <NavLink to="/help">Help</NavLink>
-                    <button onClick={() => {
-                        console.log(props)
-                        logoutUser(props)}}>Logout</button>
+                    <button onClick={() => logoutUser(props)}>Logout</button>
                 </div>
             ) : (
                 <div>
@@ -28,9 +22,7 @@ const Header = (props) => {
             )}
         </nav>
     </div>
-)}
-
-// wrap with router and use service to logout
+)
 
 export default connect((state) => {
     return {

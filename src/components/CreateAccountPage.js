@@ -1,5 +1,7 @@
 import React from 'react'
-import axios from 'axios'
+import createUser from '../services/users/createUser'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class CreateAccountPage extends React.Component {
     constructor(props) {
@@ -14,19 +16,10 @@ class CreateAccountPage extends React.Component {
     }
     submitHandler = (e) => {
         e.preventDefault()
-        console.log(this.state);
-        axios.post('http://localhost:8080/users', this.state)
-            .then(response => {
-                console.log(response)
-                localStorage.setItem('authToken', response.data.token)
-            })
-            .catch(error => console.log(error))
+        createUser(this.state, this.props)
     }
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
-    }
-    componentDidMount = () => {
-        // axios.post('http://localhost8080/users', this.state)
     }
     render() {
         return (
@@ -73,4 +66,9 @@ class CreateAccountPage extends React.Component {
     }
 }
 
-export default CreateAccountPage
+export default connect((state) => {
+    return {
+        user: state.user,
+        error: state.error
+    }
+})(withRouter(CreateAccountPage))

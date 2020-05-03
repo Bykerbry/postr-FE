@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { removeAuth } from '../actions/userActions'
-import { setError } from '../actions/errorActions'
+import { removeAuth, removeUser } from '../../actions/userActions'
+import { setError } from '../../actions/errorActions'
 
 
 
@@ -9,6 +9,7 @@ const logoutUser = (props) => {
         .then(response => {
             localStorage.removeItem('authToken')
             props.dispatch(removeAuth())
+            props.dispatch(removeUser())
             props.history.push('/login')
             delete axios.defaults.headers.common['Authorization']
         })

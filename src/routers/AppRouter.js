@@ -9,14 +9,12 @@ import AuthRoute from '../components/AuthRoute'
 import CreateAccountPage from '../components/CreateAccountPage'
 
 
-
-
 const AppRouter = () => (
     <div>
         <BrowserRouter>
             <Header />
             <Switch>
-                <AuthRoute exact={true} path='/help' component={HelpPage} />
+                <Route exact={true} path='/help' component={HelpPage} />
                 <Route exact={true} path='/login' component={LoginPage} />
                 <Route exact={true} path='/create-account' component={CreateAccountPage} />
                 <AuthRoute exact={true} path='/' component={ProfilePage} />

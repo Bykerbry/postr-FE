@@ -14,10 +14,15 @@ const setUser = ({ info }) => ({
     info
 })
 
+const removeUser = () => ({
+    type: 'REMOVE_USER'
+})
+
 
 
 export { 
     setAuth, 
     removeAuth,
-    setUser
+    setUser,
+    removeUser
 }

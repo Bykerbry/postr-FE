@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, Redirect} from 'react-router-dom'
-import loginUser from '../services/loginUser'
+import loginUser from '../services/users/loginUser'
 
 
 export class LoginPage extends Component {
@@ -26,6 +26,7 @@ export class LoginPage extends Component {
     // Below is required in place of componnentWillRecieveProps()
     // getDerivedStateFromProps(nextProps, prevState){ if change component did update will be called }
     // componentDidUpdate(prevProps, prevState) { setState can then be called here }
+    // also need user feedback on errors
 
     render() {
         if(this.props.user.authToken) {
