@@ -1,8 +1,8 @@
 import axios from 'axios'
 import * as jwt from 'jwt-decode'
-import { removeAuth, removeUser } from '../actions/userActions';
+import { userLogout } from '../actions/appActions';
 import readUser from '../services/users/readUser'
-import loadUserPosts from '../services/posts/loadUserPosts'
+import getUserPosts from '../services/posts/getUserPosts'
 
 
 const checkAuth = ({dispatch}) => {
@@ -11,14 +11,13 @@ const checkAuth = ({dispatch}) => {
         const decoded = jwt(token)
         const now = Date.now() / 1000
         if ( now > decoded.exp) {
-            dispatch(removeAuth())
-            dispatch(removeUser())
             localStorage.removeItem('authToken')
             delete axios.defaults.headers.common['Authorization']
+            dispatch(userLogout())
             window.location.href = './login'
         } else {
             readUser(token, dispatch)
-            loadUserPosts(dispatch)
+            getUserPosts(dispatch)
         }
     } 
 } 

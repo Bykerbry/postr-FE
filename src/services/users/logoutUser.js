@@ -1,22 +1,19 @@
 import axios from 'axios'
-import { removeAuth, removeUser } from '../../actions/userActions'
 import { setError } from '../../actions/errorActions'
+import { userLogout } from '../../actions/appActions'
 
 
-
-const logoutUser = (props) => {
+const logoutUser = ({dispatch, history}) => {
     axios.post('http://localhost:8080/users/logout')
         .then(response => {
             localStorage.removeItem('authToken')
-            props.dispatch(removeAuth())
-            props.dispatch(removeUser())
-            props.history.push('/login')
+            history.push('/login')
             delete axios.defaults.headers.common['Authorization']
+            dispatch(userLogout())
         })
         .catch(error => {
-            error.response ? props.dispatch(setError(error.response.data)) : props.dispatch(setError(error.message))
+            error.response ? dispatch(setError(error.response.data)) : dispatch(setError(error.message))
         })
 }
 
 export default logoutUser
-

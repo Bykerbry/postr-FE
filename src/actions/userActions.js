@@ -1,12 +1,7 @@
 
-
 const setAuth = ({ authToken }) => ({
     type: 'SET_AUTH',
     authToken
-})
-
-const removeAuth = () => ({
-    type: 'REMOVE_AUTH'
 })
 
 const setUser = ({ info }) => ({
@@ -14,15 +9,8 @@ const setUser = ({ info }) => ({
     info
 })
 
-const removeUser = () => ({
-    type: 'REMOVE_USER'
-})
-
-
 
 export { 
-    setAuth, 
-    removeAuth,
-    setUser,
-    removeUser
+    setAuth,
+    setUser
 }
