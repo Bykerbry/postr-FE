@@ -9,7 +9,13 @@ const loadAllPosts = (posts) => ({
     posts
 })
 
+const postCreated = (post) => ({
+    type: 'POST_CREATED',
+    post
+})
+
 export {
     loadUserPosts,
-    loadAllPosts
+    loadAllPosts,
+    postCreated
 }
