@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CreatePostModal from './CreatePostModal'
 import createPost from '../services/posts/createPost'
+import Post from './Post'
 
 export class ProfilePage extends Component {
     constructor(props) {
@@ -34,11 +35,8 @@ export class ProfilePage extends Component {
                 {
                     this.props.posts.user
                     &&
-                    this.props.posts.user.map(post => (
-                        <div style={{border: "1px solid black"}} key={post._id}>
-                            <h3>{post.title}</h3>
-                            <p>{post.body}</p>
-                        </div>
+                    this.props.posts.user.reverse().map(post => (
+                        <Post post={post} key={post._id}/>
                     ))
                 }
             </div>
