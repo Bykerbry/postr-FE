@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, Redirect} from 'react-router-dom'
 import loginUser from '../services/users/loginUser'
-
+import { removeError } from '../actions/errorActions'
 
 export class LoginPage extends Component {
     constructor(props) {
@@ -16,17 +16,15 @@ export class LoginPage extends Component {
     }
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
+        if (this.props.error.error) {
+            this.props.dispatch(removeError())
+        }
     }
     handleSubmit = async (e) => {
         e.preventDefault()
         const {email, password} = this.state
         loginUser({email, password}, this.props)
     }
-
-    // Below is required in place of componnentWillRecieveProps()
-    // getDerivedStateFromProps(nextProps, prevState){ if change component did update will be called }
-    // componentDidUpdate(prevProps, prevState) { setState can then be called here }
-    // also need user feedback on errors
 
     render() {
         if(this.props.user.authToken) {
@@ -50,7 +48,7 @@ export class LoginPage extends Component {
                         onChange={this.handleChange}    
                     />
                 </div>
-                {this.state.error && <p>{this.state.error}</p>}
+                {this.props.error.error && <p>{this.props.error.error}</p>}
                 <button>Login</button>
                 <p>OR</p>
                 <Link to="/create-account">Create Account</Link>
@@ -61,7 +59,8 @@ export class LoginPage extends Component {
 
 export default connect((state) => {
     return {
-        user: state.user
+        user: state.user,
+        error: state.error
     }
 })(withRouter(LoginPage))
 
