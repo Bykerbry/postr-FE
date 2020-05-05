@@ -19,7 +19,7 @@ const AppRouter = () => (
                 <Route exact={true} path='/create-account' component={CreateAccountPage} />
                 <AuthRoute exact={true} path='/' component={ProfilePage} />
                 <AuthRoute exact={true} path='/feed' component={FeedPage} />
-                <Redirect from='*' to='login' />
+                <Redirect from='*' to='/login' />
             </Switch>
         </BrowserRouter>
     </div>
