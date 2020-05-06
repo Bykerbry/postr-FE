@@ -13,6 +13,7 @@ export class FeedPage extends Component {
     render() {
         return (
             <div>
+                <h1>Postr Feed</h1>
                 <p>Hey {this.props.user.info.firstName}, here is your Postr Feed!</p>
                 {
                     this.props.posts.all

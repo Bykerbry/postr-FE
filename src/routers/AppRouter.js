@@ -7,7 +7,7 @@ import HelpPage from '../components/HelpPage'
 import LoginPage from '../components/LoginPage'
 import AuthRoute from '../components/AuthRoute'
 import CreateAccountPage from '../components/CreateAccountPage'
-
+import UpdateProfilePage from '../components/UpdateProfilePage'
 
 const AppRouter = () => (
     <div>
@@ -18,6 +18,7 @@ const AppRouter = () => (
                 <Route exact={true} path='/login' component={LoginPage} />
                 <Route exact={true} path='/create-account' component={CreateAccountPage} />
                 <AuthRoute exact={true} path='/' component={ProfilePage} />
+                <AuthRoute exact={true} path='/update' component={UpdateProfilePage} />
                 <AuthRoute exact={true} path='/feed' component={FeedPage} />
                 <Redirect from='*' to='/login' />
             </Switch>

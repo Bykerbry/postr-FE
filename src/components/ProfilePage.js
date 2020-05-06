@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CreatePostModal from './CreatePostModal'
 import createPost from '../services/posts/createPost'
 import Post from './Post'
+import { Link } from 'react-router-dom'
 
 export class ProfilePage extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ export class ProfilePage extends Component {
     render() {
         return (
             <div>
-                <p>Welcome {this.props.user.info.firstName}!</p>
+                <h1>Welcome {this.props.user.info.firstName}!</h1>
+                <Link to='/update'>Update Profile</Link>
                 <button onClick={this.handleClick}>Create Post</button>
                 <CreatePostModal
                     handleCreatePost={this.handleCreatePost}
