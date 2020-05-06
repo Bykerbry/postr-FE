@@ -14,8 +14,14 @@ const postCreated = (post) => ({
     post
 })
 
+const postDeleted = (id) => ({
+    type: 'POST_DELETED',
+    id
+})
+
 export {
     loadUserPosts,
     loadAllPosts,
-    postCreated
+    postCreated,
+    postDeleted
 }

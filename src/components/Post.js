@@ -1,8 +1,12 @@
 import React from 'react'
 import moment from 'moment'
+import deletePost from '../services/posts/deletePost'
+import updatePost from '../services/posts/updatePost'
+import { connect } from 'react-redux'
 
 
-const Post = (props) => {
+const Post = ({ post, user, dispatch }) => {
+
     const format = (createdAt) => {
         const created    = moment(createdAt)
         const now        = moment()
@@ -18,14 +22,32 @@ const Post = (props) => {
         }
         return created.format('ddd, MMM D, h:mm a')
     }
+    const handleDeleteClick = () =>{
+        deletePost(post._id, dispatch)
+    }
+    const handleUpdateClick = () =>{
+        updatePost(post._id, dispatch)
+    }
 
     return (
         <div style={{border: "1px solid black"}}>
-            <p>{props.post.creator.name} - {format(props.post.createdAt)}</p>
-            <h3>{props.post.title}</h3>
-            <p>{props.post.body}</p>
+            <p>{post.creator.name} - {format(post.createdAt)}</p>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+            { 
+                post.creator._id === user.info._id 
+                && 
+                <div>
+                    <button onClick={handleDeleteClick}>Delete</button> 
+                    <button onClick={handleUpdateClick}>Update</button>
+                </div>
+            }
         </div>
     )
 }
 
-export default Post
+
+export default connect((state) => ({
+    user: state.user,
+    posts: state.posts
+}))(Post)

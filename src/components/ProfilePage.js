@@ -36,7 +36,7 @@ export class ProfilePage extends Component {
                     this.props.posts.user
                     &&
                     this.props.posts.user.reverse().map(post => (
-                        <Post post={post} key={post._id}/>
+                        <Post post={post} user={this.props.user} key={post._id}/>
                     ))
                 }
             </div>
