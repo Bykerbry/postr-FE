@@ -9,8 +9,9 @@ const Post = ({ post, user, dispatch }) => {
     const isUserPost = post.creator._id === user.info._id
     const [ title, setTitle ] = useState(post.title)
     const [ body, setBody ] = useState(post.body)
-    const [ editingTitle, setEditingTitle ] = useState(false)
-    const [ editingBody, setEditingBody ] = useState(false)
+    const [ editing, setEditing ] = useState(false)
+    const [ titleBeforeEdit, setTitleBeforeEdit ] = useState(post.title)
+    const [ bodyBeforeEdit, setBodyBeforeEdit ] = useState(post.body)
 
 
     const format = (createdAt) => {
@@ -31,67 +32,75 @@ const Post = ({ post, user, dispatch }) => {
     const handleDeleteClick = () => {
         deletePost(post._id, dispatch)
     }
-    const handleEditingTitle = () => {
+    const handleEditing = () => {
         if (isUserPost) {
-            setEditingTitle(true)
+            setTitleBeforeEdit(title)
+            setBodyBeforeEdit(body)
+            setEditing(true)
         } 
     }
-    const handleEditingBody = () => {
-        if (isUserPost) {
-            setEditingBody(true)
-        }
-    }
+
     const handleUpdateTitle = () => {
         updatePost(post._id, {title}, dispatch)
-        setEditingTitle(false)
+        setEditing(false)
     }
     const handleUpdateBody = () => {
         updatePost(post._id, {body}, dispatch)
-        setEditingBody(false)
+        setEditing(false)
+    }
+    const handleDontUpdateTitle = () => {
+        setTitle(titleBeforeEdit)
+        setBody(bodyBeforeEdit)
+        setEditing(false)
+
     }
 
     return (
         <div style={{border: "1px solid black"}}>
             <p>{post.creator.name} - {format(post.createdAt)}</p>
             {
-                editingTitle
+                editing
                 ?
                 <div>
-                    <input 
-                        type='text'
-                        name='title'
-                        value={title}
-                        onChange={(e) => {
-                            console.log(e.target.value)
-                            setTitle(e.target.value)
-                            console.log(title)
-                        }}
-                    />
-                    <button onClick={handleUpdateTitle}>Update Title</button>
+                    <div>
+                        <input 
+                            type='text'
+                            name='title'
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <button onClick={handleUpdateTitle}>
+                            Update Title
+                        </button>
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            name='title'
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                        />
+                        <button onClick={handleUpdateBody}>Update Comment</button>
+                    </div>
                 </div>
                 :
-                <h3 onClick={handleEditingTitle}>{post.title}</h3>
+                <div>
+                    <h3 onClick={handleEditing}>{post.title}</h3>
+                    <p onClick={handleEditing}>{post.body}</p>
+                </div>
             }
             {
-                editingBody
-                ?
-                <div>
-                    <input
-                        type='text'
-                        name='title'
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                    />
-                    <button onClick={handleUpdateBody}>Update Comment</button>
-                </div>
-                :
-                <p onClick={handleEditingBody}>{post.body}</p>
-
-            }
-            {   
                 isUserPost && 
                 <div>
-                    <button onClick={handleDeleteClick}>Delete</button>
+                    <button onClick={handleDeleteClick}>
+                        Delete
+                    </button>
+                    {
+                        editing && 
+                        <button onClick={handleDontUpdateTitle}>
+                            Don't Update
+                        </button>
+                    }
                 </div>
             }
         </div>

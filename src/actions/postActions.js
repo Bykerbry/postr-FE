@@ -19,9 +19,9 @@ const postUpdated = (post) => ({
     post
 })
 
-const postDeleted = (post) => ({
+const postDeleted = (id) => ({
     type: 'POST_DELETED',
-    post
+    id
 })
 
 export {
