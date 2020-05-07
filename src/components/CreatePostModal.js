@@ -17,7 +17,6 @@ export class CreatePostModal extends Component {
         console.log(this.state)
     }
     handleChange = (e) => {
-        console.log(e.target.name)
         this.setState({[e.target.name]: e.target.value})
     }
     render() {
