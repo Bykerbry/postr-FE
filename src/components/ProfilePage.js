@@ -25,9 +25,18 @@ export class ProfilePage extends Component {
         this.setState({isModalOpen: false})
     }
     render() {
+        const { user, posts } = this.props
         return (
             <div>
-                <h1>Welcome {this.props.user.info.firstName}!</h1>
+                <h1>Welcome {user.info.firstName}!</h1>
+                {user.info.profilePicture ? (
+                    <img style={{maxHeight: '100px'}} src={`http://localhost:8080/${user.info.profilePicture}`} alt='profile'/>
+                ) : (
+                    <div>
+                        <img style={{maxHeight: '100px'}} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+                        <button>Add Profile Picture</button>
+                    </div>
+                )}
                 <Link to='/update'>Update Profile</Link>
                 <button onClick={this.handleClick}>Create Post</button>
                 <CreatePostModal
@@ -35,10 +44,10 @@ export class ProfilePage extends Component {
                     isModalOpen={this.state.isModalOpen}
                 />
                 {
-                    this.props.posts.user
+                    posts.user
                     &&
-                    this.props.posts.user.reverse().map(post => (
-                        <Post post={post} user={this.props.user} key={post._id}/>
+                    posts.user.reverse().map(post => (
+                        <Post post={post} user={user} key={post._id}/>
                     ))
                 }
             </div>

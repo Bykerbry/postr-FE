@@ -13,7 +13,6 @@ const Post = ({ post, user, dispatch }) => {
     const [ titleBeforeEdit, setTitleBeforeEdit ] = useState(post.title)
     const [ bodyBeforeEdit, setBodyBeforeEdit ] = useState(post.body)
 
-
     const format = (createdAt) => {
         const created    = moment(createdAt)
         const now        = moment()
@@ -39,7 +38,6 @@ const Post = ({ post, user, dispatch }) => {
             setEditing(true)
         } 
     }
-
     const handleUpdateTitle = () => {
         updatePost(post._id, {title}, dispatch)
         setEditing(false)
@@ -52,12 +50,17 @@ const Post = ({ post, user, dispatch }) => {
         setTitle(titleBeforeEdit)
         setBody(bodyBeforeEdit)
         setEditing(false)
-
     }
 
     return (
         <div style={{border: "1px solid black"}}>
-            <p>{post.creator.name} - {format(post.createdAt)}</p>
+            {post.creator.profilePicture ? (
+                <img style={{maxHeight: '50px', borderRadius: '50%'}} src={`http://localhost:8080/${post.creator.profilePicture}`} alt='profile'/>
+            ) : (
+                <img style={{maxHeight: '50px', borderRadius: '50%'}} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+
+            )}
+            <span>{post.creator.name} - {format(post.createdAt)}</span>
             {
                 editing
                 ?
@@ -80,7 +83,9 @@ const Post = ({ post, user, dispatch }) => {
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
                         />
-                        <button onClick={handleUpdateBody}>Update Comment</button>
+                        <button onClick={handleUpdateBody}>
+                            Update Comment
+                        </button>
                     </div>
                 </div>
                 :

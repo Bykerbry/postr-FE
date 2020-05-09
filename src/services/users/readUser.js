@@ -6,12 +6,13 @@ const readUser = (token, dispatch) => {
     axios.defaults.headers.common['Authorization'] = token
     axios.get('http://localhost:8080/users/me')
         .then(response => {
-            const { _id, firstName, lastName, email } = response.data
+            const { _id, firstName, lastName, email, profilePicture } = response.data
             dispatch(setUser({info: {
                 _id,
                 firstName,
                 lastName,
-                email
+                email,
+                profilePicture
             }}))
             dispatch(setAuth({authToken: token}))
         })
