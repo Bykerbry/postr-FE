@@ -1,0 +1,28 @@
+@import '../base/settings';
+
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $black;
+    padding: 0 $l;
+}
+
+.navContainer {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    margin: 0 $xs;
+}
+
+.logoutBtn {
+    padding: $xs;
+    margin-left: $xs;
+}
+
+#logoutIcon {
+    font-size: $xl;
+}

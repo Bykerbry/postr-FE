@@ -3,7 +3,6 @@ import { setUser, setAuth } from '../actions/userActions'
 import { removeError } from '../actions/errorActions'
 
 const loginTryCB = (response, dispatch, history) => {
-    console.log(response.data)
     const {  _id, firstName, lastName, email, profilePicture } = response.data.user
     localStorage.setItem('authToken', response.data.token)
     history.push('/')

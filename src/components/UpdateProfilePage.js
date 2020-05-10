@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { removeError } from '../actions/errorActions'
 import updateUser from '../services/users/updateUser'
+import UploadImage from './UploadImage'
 
 
 const UpdateProfilePage = (props) => {
@@ -26,6 +27,7 @@ const UpdateProfilePage = (props) => {
     return (
         <div>
             <h1>Update Profile</h1>
+            <h3>Update Your Account Information</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="firstName">First Name</label>
@@ -59,6 +61,8 @@ const UpdateProfilePage = (props) => {
                 </div>
                 <button>Update Profile</button>
             </form>
+            <h3>Update Your Profile Picture</h3>
+            <UploadImage />
         </div>
     )
 }

@@ -1,0 +1,24 @@
+@import '../base/settings';
+
+.welcome {
+    margin-left: $l;
+}
+
+.profilePicture {
+    height: 6rem;
+    margin-left: $l;
+}
+
+.updateAndCreate {
+    display: flex;
+    flex-direction: column;
+    margin-left: $l;
+}
+
+.update {
+    margin: $xs 0;
+}
+
+.create {
+    margin-right: $l;
+}

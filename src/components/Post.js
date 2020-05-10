@@ -3,6 +3,7 @@ import moment from 'moment'
 import deletePost from '../services/posts/deletePost'
 import updatePost from '../services/posts/updatePost'
 import { connect } from 'react-redux'
+import styles from '../styles/components/Post.module.scss'
 
 
 const Post = ({ post, user, dispatch }) => {
@@ -54,13 +55,19 @@ const Post = ({ post, user, dispatch }) => {
 
     return (
         <div style={{border: "1px solid black"}}>
-            {post.creator.profilePicture ? (
-                <img style={{maxHeight: '50px', borderRadius: '50%'}} src={`http://localhost:8080/${post.creator.profilePicture}`} alt='profile'/>
-            ) : (
-                <img style={{maxHeight: '50px', borderRadius: '50%'}} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+            <div className='header'>
+                {post.creator.profilePicture ? (
+                    <div className={styles.container}> 
+                        <img className={styles.img} src={`http://localhost:8080/${post.creator.profilePicture}`} alt='profile'/>
+                    </div>
+                ) : (
+                    <div className={styles.container}> 
+                        <img className={styles.img} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+                    </div>
 
-            )}
-            <span>{post.creator.name} - {format(post.createdAt)}</span>
+                )}
+                <span>{post.creator.name} - {format(post.createdAt)}</span>
+            </div>
             {
                 editing
                 ?
@@ -89,7 +96,7 @@ const Post = ({ post, user, dispatch }) => {
                     </div>
                 </div>
                 :
-                <div>
+                <div className={styles.postContent}>
                     <h3 onClick={handleEditing}>{post.title}</h3>
                     <p onClick={handleEditing}>{post.body}</p>
                 </div>
@@ -97,8 +104,8 @@ const Post = ({ post, user, dispatch }) => {
             {
                 isUserPost && 
                 <div>
-                    <button onClick={handleDeleteClick}>
-                        Delete
+                    <button onClick={handleDeleteClick} className={styles.deleteBtn}>
+                        <span className="material-icons" id={styles.deleteIcon}>clear</span> Delete
                     </button>
                     {
                         editing && 

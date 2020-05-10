@@ -8,6 +8,7 @@ const setUser = ({ info }) => ({
     type: 'SET_USER',
     info
 })
+
 const userUpdated = ({ info }) => ({
     type: 'USER_UPDATED',
     info

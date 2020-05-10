@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CreatePostModal from './CreatePostModal'
-import createPost from '../services/posts/createPost'
-import Post from './Post'
 import { Link } from 'react-router-dom'
+import createPost from '../services/posts/createPost'
+import CreatePostModal from './CreatePostModal'
+import Post from './Post'
+import UploadImage from './UploadImage'
+import styles from '../styles/components/ProfilePage.module.scss'
+
+
 
 export class ProfilePage extends Component {
     constructor(props) {
@@ -28,17 +32,20 @@ export class ProfilePage extends Component {
         const { user, posts } = this.props
         return (
             <div>
-                <h1>Welcome {user.info.firstName}!</h1>
+                <h1 className={styles.welcome}>Welcome {user.info.firstName}!</h1>
                 {user.info.profilePicture ? (
-                    <img style={{maxHeight: '100px'}} src={`http://localhost:8080/${user.info.profilePicture}`} alt='profile'/>
+                    <img className={styles.profilePicture} src={`http://localhost:8080/${user.info.profilePicture}`} alt='profile'/>
                 ) : (
                     <div>
-                        <img style={{maxHeight: '100px'}} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
-                        <button>Add Profile Picture</button>
+                        <img className={styles.profilePicture} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+                        <p>Add a Profile Picture</p>
+                        <UploadImage />
                     </div>
                 )}
-                <Link to='/update'>Update Profile</Link>
-                <button onClick={this.handleClick}>Create Post</button>
+                <div className={styles.updateAndCreate}>
+                    <Link className={styles.update} to='/update'>Update Profile</Link>
+                    <button className={styles.create} onClick={this.handleClick}>Create Post</button>
+                </div>
                 <CreatePostModal
                     handleCreatePost={this.handleCreatePost}
                     isModalOpen={this.state.isModalOpen}

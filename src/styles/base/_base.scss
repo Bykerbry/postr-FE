@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    font-family: 'Open Sans', sans-serif;
+    background: $darkGrey;
+    color: $white;
+  }
+  
+  a {
+    color: $white;
+  }
+
+  button {
+      background: $pink;
+      border: none;
+      border-radius: $xs;
+      color: $white;
+      padding: $xs $m;
+      font-size: $l;
+  }
