@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { removeError } from '../actions/errorActions'
 import updateUser from '../services/users/updateUser'
 import UploadImage from './UploadImage'
+// import styles from '../styles/components/UpdateProfilePage.module.scss'
+import styles from '../styles/components/Forms.module.scss'
 
 
 const UpdateProfilePage = (props) => {
@@ -25,41 +27,44 @@ const UpdateProfilePage = (props) => {
     }
 
     return (
-        <div>
+        <div className={styles.updateContainer}>
             <h1>Update Profile</h1>
             <h3>Update Your Account Information</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="firstName">First Name</label>
                     <input 
                         type="text" 
-                        name="firstName" 
+                        name="firstName"
+                        className={styles.input} 
                         ref={register({required: true})}
                     />
                 </div>
                 {errors.firstName && <p>First name is required</p>}
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="lastName">Last Name</label>
                     <input 
                         type="text" 
                         name="lastName"
+                        className={styles.input}
                         ref={register({required: true})}
                     />
                 </div>
                 {errors.lastName && <p>Last name is required</p>}
 
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="email">E-mail</label>
                     <input 
                         type="text" 
                         name="email" 
+                        className={styles.input}
                         ref={register({required: true})}
                         onChange={handleEmailChange}
                     />
                     {errors.email && <p>Email is required</p>}
                     {props.error.email && <p>{props.error.email.message}</p>}
                 </div>
-                <button>Update Profile</button>
+                <button className={styles.centeredBtn}>Update Profile</button>
             </form>
             <h3>Update Your Profile Picture</h3>
             <UploadImage />

@@ -1,0 +1,47 @@
+@import '../base/settings';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 5rem);
+    align-items: center;
+    justify-content: center;
+}
+
+.updateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    flex: 1;
+}
+
+.pageTitle {
+    margin-top: 0;
+}
+
+.input {
+    margin-top: 2px;
+    background: $platinum;
+    border: none;
+    border-radius: 1px;
+    padding: $six $s;
+}
+
+.inputContainer {
+    margin-top: $m;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginBtn {
+    margin-top: $l;
+}
+
+.centeredBtn {
+    margin: $xl auto 0 auto; 
+    display: block;
+}

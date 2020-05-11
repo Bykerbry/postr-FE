@@ -1,0 +1,33 @@
+@import '../base/settings';
+
+
+.chooseFileBtn {
+    background: $pink;
+    border: 1px solid $darkGrey;
+    border-radius: $xs;
+    color: $white;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: $l;
+    font-weight: 600;
+    margin: auto;
+    padding: $s $m;
+    width: fit-content;
+    cursor: pointer;
+    transition: .15s ease-in-out;
+}
+
+.chooseFileBtn:hover {
+    border: 1px solid $pink;
+    color: $pink;
+    background-color: $darkGrey;
+}
+
+.fileName {
+    text-align: center;
+}
+
+.submitBtn {
+    display: block;
+    margin: 1rem auto;
+}

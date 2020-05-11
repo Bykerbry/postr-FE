@@ -4,6 +4,7 @@ import deletePost from '../services/posts/deletePost'
 import updatePost from '../services/posts/updatePost'
 import { connect } from 'react-redux'
 import styles from '../styles/components/Post.module.scss'
+import formStyles from '../styles/components/Forms.module.scss'
 
 
 const Post = ({ post, user, dispatch }) => {
@@ -39,12 +40,12 @@ const Post = ({ post, user, dispatch }) => {
             setEditing(true)
         } 
     }
-    const handleUpdateTitle = () => {
-        updatePost(post._id, {title}, dispatch)
-        setEditing(false)
-    }
-    const handleUpdateBody = () => {
-        updatePost(post._id, {body}, dispatch)
+    // const handleUpdateTitle = () => {
+    //     updatePost(post._id, {title}, dispatch)
+    //     setEditing(false)
+    // }
+    const handleUpdate = () => {
+        updatePost(post._id, {title, body}, dispatch)
         setEditing(false)
     }
     const handleDontUpdateTitle = () => {
@@ -54,14 +55,14 @@ const Post = ({ post, user, dispatch }) => {
     }
 
     return (
-        <div style={{border: "1px solid black"}}>
+        <div className={styles.container}>
             <div className='header'>
                 {post.creator.profilePicture ? (
-                    <div className={styles.container}> 
+                    <div className={styles.imgContainer}> 
                         <img className={styles.img} src={`http://localhost:8080/${post.creator.profilePicture}`} alt='profile'/>
                     </div>
                 ) : (
-                    <div className={styles.container}> 
+                    <div className={styles.imgContainer}> 
                         <img className={styles.img} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
                     </div>
 
@@ -77,22 +78,18 @@ const Post = ({ post, user, dispatch }) => {
                             type='text'
                             name='title'
                             value={title}
+                            className={formStyles.input}
                             onChange={(e) => setTitle(e.target.value)}
                         />
-                        <button onClick={handleUpdateTitle}>
-                            Update Title
-                        </button>
                     </div>
                     <div>
                         <input
                             type='text'
                             name='title'
                             value={body}
+                            className={formStyles.input}
                             onChange={(e) => setBody(e.target.value)}
                         />
-                        <button onClick={handleUpdateBody}>
-                            Update Comment
-                        </button>
                     </div>
                 </div>
                 :
@@ -102,18 +99,20 @@ const Post = ({ post, user, dispatch }) => {
                 </div>
             }
             {
-                isUserPost && 
-                <div>
-                    <button onClick={handleDeleteClick} className={styles.deleteBtn}>
-                        <span className="material-icons" id={styles.deleteIcon}>clear</span> Delete
-                    </button>
-                    {
-                        editing && 
-                        <button onClick={handleDontUpdateTitle}>
-                            Don't Update
+                isUserPost && editing &&                 
+                    <div className={styles.btnContainer}>
+                        <button className={styles.updateBtn} onClick={handleUpdate}>
+                            Update
                         </button>
-                    }
-                </div>
+                        <button onClick={handleDontUpdateTitle}>
+                            Cancel
+                        </button>
+                        <button onClick={handleDeleteClick} className={styles.deleteBtn}>
+                            <span className="material-icons" id={styles.deleteIcon}> 
+                                delete_forever
+                            </span>
+                        </button>
+                    </div>
             }
         </div>
     )

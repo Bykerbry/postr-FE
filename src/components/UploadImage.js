@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import uploadImage from '../services/users/uploadImage'
+import styles from '../styles/components/UploadImage.module.scss'
 
 const UploadImage = ({user, dispatch}) => {
     const [image, setImage] = useState('')
@@ -18,8 +19,13 @@ const UploadImage = ({user, dispatch}) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input type='file' onChange={handleFileChosen}/>
-            <button type='submit'>Submit</button>
+            <label htmlFor='profilePicture' className={styles.chooseFileBtn}>Upload Image</label>
+            {image && <p className={styles.fileName}>{image.name}</p>}
+            <input style={{'display': 'none'}} id='profilePicture' type='file' onChange={handleFileChosen}/>
+            {
+                image && <button className={styles.submitBtn} type='submit'>Make Profile Picture</button>
+
+            }
         </form>
     )
 }

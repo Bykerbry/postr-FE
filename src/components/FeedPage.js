@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
 import getAllPosts from '../services/posts/getAllPosts'
+import styles from '../styles/components/FeedPage.module.scss'
 
 
 export class FeedPage extends Component {
@@ -13,8 +14,8 @@ export class FeedPage extends Component {
     render() {
         return (
             <div>
-                <h1>Postr Feed</h1>
-                <p>Hey {this.props.user.info.firstName}, here is your Postr Feed!</p>
+                <h1 className={styles.pageTitle}>Postr Feed</h1>
+                <p className={styles.msg}>Hey {this.props.user.info.firstName}, here is your Postr Feed!</p>
                 {
                     this.props.posts.all
                     &&

@@ -1,6 +1,5 @@
 @import '../base/settings';
 
-
 .nav {
     display: flex;
     align-items: center;
@@ -16,6 +15,18 @@
 
 .link {
     margin: 0 $xs;
+    text-decoration: none;
+    border-bottom: 2px solid $white;
+    animation: .15s ease-in-out;
+}
+
+.link:hover {
+    border-bottom: 2px solid $pink;
+}
+
+.active {
+    border-bottom: 2px solid $pink;
+    color: $pink
 }
 
 .logoutBtn {

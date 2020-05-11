@@ -1,24 +1,44 @@
 body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  html {
-    font-family: 'Open Sans', sans-serif;
-    background: $darkGrey;
-    color: $white;
-  }
-  
-  a {
-    color: $white;
-  }
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  button {
-      background: $pink;
-      border: none;
-      border-radius: $xs;
-      color: $white;
-      padding: $xs $m;
-      font-size: $l;
-  }
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  background: $darkGrey;
+  color: $white;
+}
+
+a {
+  color: $white;
+  transition: .15s ease-in-out;
+}
+
+a:hover {
+  color: $pink;
+}
+
+button {
+    background: $pink;
+    border: 1px solid $darkGrey;
+    border-radius: $xs;
+    color: $white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: $l;
+    font-weight: 600;
+    padding: $s $m;
+    cursor: pointer;
+    transition: .15s ease-in-out;
+}
+
+button:hover {
+  border: 1px solid $pink;
+  color: $pink;
+  background-color: $darkGrey;
+}
+
+input {
+  font-family: 'Open Sans', sans-serif;
+}

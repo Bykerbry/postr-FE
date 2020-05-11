@@ -6,26 +6,24 @@ import styles from '../styles/components/Header.module.scss'
 
 
 const Header = (props) => (
-    <div>
-        <nav className={styles.nav}>
-            <h1>Postr</h1>
-            { props.user.authToken ? (
-                <div className={styles.navContainer}>
-                    <NavLink className={styles.link} to="/">Profile</NavLink>
-                    <NavLink className={styles.link} to="/feed">Feed</NavLink>          
-                    <NavLink className={styles.link} to="/help">Help</NavLink>
-                    <button onClick={() => logoutUser(props)} className={styles.logoutBtn}>
-                        <span className="material-icons" id={styles.logoutIcon}>exit_to_app</span>
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.navContainer}>
-                    <NavLink className={styles.link} to="/help">Help</NavLink>
-                    <NavLink className={styles.link} to="/login">Login</NavLink>
-                </div>
-            )}
-        </nav>
-    </div>
+    <nav className={styles.nav}>
+        <h1>Postr</h1>
+        { props.user.authToken ? (
+            <div className={styles.navContainer}>
+                <NavLink className={styles.link} activeClassName={styles.active} exact={true} to="/">Profile</NavLink>
+                <NavLink className={styles.link} activeClassName={styles.active} to="/feed">Feed</NavLink>          
+                <NavLink className={styles.link} activeClassName={styles.active} to="/help">Help</NavLink>
+                <button onClick={() => logoutUser(props)} className={styles.logoutBtn}>
+                    <span className="material-icons" id={styles.logoutIcon}>exit_to_app</span>
+                </button>
+            </div>
+        ) : (
+            <div className={styles.navContainer}>
+                <NavLink className={styles.link} to="/help">Help</NavLink>
+                <NavLink className={styles.link} to="/login">Login</NavLink>
+            </div>
+        )}
+    </nav>
 )
 
 export default connect((state) => {

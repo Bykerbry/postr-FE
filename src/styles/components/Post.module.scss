@@ -1,7 +1,12 @@
 @import '../base/settings';
 
 .container {
-    margin: 1rem;
+    border: 1px solid $black;
+    margin: $l;
+}
+
+.imgContainer {
+    margin-right: 1rem;
     height: 50px;
     width: 50px;
     position: relative;
@@ -19,19 +24,28 @@
     display: flex;
     align-items: center;
     background: $xDarkGrey;
+    padding: $l;
 }
 
 .postContent {
     margin: 0 $l;
 }
 
-.deleteBtn {
+.btnContainer {
     display: flex;
-    align-items: center;
-    margin-left: $l;
+    flex-wrap: wrap;
+    margin-top: $s;
+}
+
+.updateBtn {
+    margin-right: $s;
+}
+
+.deleteBtn {
+    padding: $xs;
+    margin-left: $s;
 }
 
 #deleteIcon {
-    font-size: $l;
-    margin-right: $m;
+    font-size: $xl;
 }
