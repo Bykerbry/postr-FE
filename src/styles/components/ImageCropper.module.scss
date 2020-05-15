@@ -1,0 +1,13 @@
+@import '../base/settings';
+
+.imgContainer {
+    width: 250px;
+    height: 250px;
+    margin-bottom: $l;
+}
+
+
+.img {
+    display: block;
+    max-width: 100%;
+}
