@@ -3,8 +3,7 @@ import axios from 'axios'
 import ImageCropper from './ImageCropper'
 import { connect } from 'react-redux'
 import { userUpdated } from '../actions/userActions'
-
-import uploadImage from '../services/users/uploadImage'
+// import uploadImage from '../services/users/uploadImage'
 import styles from '../styles/components/UploadImage.module.scss'
 
 const UploadImage = ({user, dispatch}) => {
@@ -35,10 +34,7 @@ const UploadImage = ({user, dispatch}) => {
             setError(error.message)
         })
     }
-    // const handleCrop = () => {
-    //     console.log(image)
-    //     setIsCropping(true)
-    // }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
