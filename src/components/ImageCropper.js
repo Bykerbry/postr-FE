@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.min.css'
+import uploadImage from '../services/users/uploadImage'
 import styles from '../styles/components/ImageCropper.module.scss'
 
 class ImageCropper extends React.Component {
@@ -8,7 +9,8 @@ class ImageCropper extends React.Component {
         super(props)
 
         this.state = {
-            croppedImg: null
+            croppedImg: null,
+            croppedImgUrl: ''
         }
         this.imgContainer = React.createRef()
         this.imgRef = React.createRef()
@@ -16,24 +18,42 @@ class ImageCropper extends React.Component {
     componentDidMount() {
         const cropper = new Cropper(this.imgRef.current, {
             aspectRatio: 1,
+            data: this.props.chosenImg,
             viewMode: 1,
-            crop: (event) => {
-                console.log('in crop')
-                const cropped = cropper.getCroppedCanvas()
-                this.setState({croppedImg: cropped})   
+            crop: () => {
+                const cropped = cropper.getCroppedCanvas({
+                    maxWidth: 4096,
+                    maxHeight: 4096,
+                    fillColor: '#fff',
+                    imageSmoothingEnabled: false,
+                    imageSmoothingQuality: 'high',
+                  })
+                this.setState({
+                    croppedImg: cropped,
+                    croppedImgUrl: cropped.toDataURL()
+                }) 
             }
         })
-        console.log(cropper)
     }
-    checkState = () => {
-        console.log(this.state)
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const cropped = this.state.croppedImg
+        cropped.toBlob(blob => {
+            const formData = new FormData()
+            const extension = blob.type.split('/')[1]
+            formData.append('profilePicture', blob, `placeholderFileName.${extension}`)
+            const file = formData.get('profilePicture')
+            uploadImage(formData, this.props.dispatch)
+            console.log(file)
+        })
     }
     render() {
         return (
-            <div className={styles.imgContainer} ref={this.imgContainer}>
-                <img className={styles.img} ref={this.imgRef} src={`http://localhost:8080/${this.props.profilePicture}`} alt='preview'/>
-                <button onClick={this.checkState}>Finish</button>
-            </div>
+            <form className={styles.imgContainer} ref={this.imgContainer} onSubmit={this.handleSubmit}>
+                <img className={styles.img} ref={this.imgRef} alt='preview' src={this.props.imageUrl}/>
+                {this.state.croppedImgUrl && <img className={styles.preview} src={this.state.croppedImgUrl} alt='preview' />}
+                <button>Make Profile Picture</button>
+            </form>
         )
     }
 }

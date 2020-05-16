@@ -1,57 +1,47 @@
 import React, { useState, useRef } from 'react'
-import axios from 'axios'
 import ImageCropper from './ImageCropper'
 import { connect } from 'react-redux'
-import { userUpdated } from '../actions/userActions'
-// import uploadImage from '../services/users/uploadImage'
 import styles from '../styles/components/UploadImage.module.scss'
 
-const UploadImage = ({user, dispatch}) => {
+const UploadImage = ({ dispatch }) => {
     const [image, setImage] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const [error, setError] = useState('')
-    const [isCropping, setIsCropping] = useState(false)
-    const imgContainer = useRef(null)
+    const fileRef = useRef(null)
 
     const handleFileChosen = e => {
-        console.log(e.target.files)
-        setImage(e.target.files[0])
-    }
+        const file = e.target.files[0]
+        console.log(file)
+        if (file.size > 5000000) {
+            setError('Images must not exceed 5MB in size')
+        } else if(file.type !== 'image/jpeg' || file.type !== 'image/png') {
+            setError('Image must be of type .jpeg or .png')
+        } else {
+            const fileReader = new FileReader()
 
+            fileReader.onloadend = () => {
+                setImageUrl(fileReader.result)
+            }
+            fileReader.readAsDataURL(file)
+         
+            setImage(file)
+            setError('')
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        console.log("form was submitted...")
-        formData.append('profilePicture', image)
-        // uploadImage(formData, dispatch)
-        axios.post('http://localhost:8080/users/me/profile-picture', formData)
-        .then(response => {
-            console.log(response.data)
-            dispatch(userUpdated({info: response.data}))
-            setIsCropping(true)
-        })
-        .catch(error => {
-            console.log(error)
-            setError(error.message)
-        })
     }
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='profilePicture' className={styles.chooseFileBtn}>Upload Image</label>
                 {image && <p className={styles.fileName}>{image.name}</p>}
                 {error && <p className={styles.fileName}>{error}</p>}
-                <input style={{'display': 'none'}} id='profilePicture' type='file' onChange={handleFileChosen}/>
-                {
-                    image && <button className={styles.submitBtn} >Format Your Picture</button>
-                }
-                {
-                    image && <button className={styles.submitBtn} type='submit'>Make Profile Picture</button>
-                }
+                <input style={{'display': 'none'}} id='profilePicture' type='file' ref={fileRef} onChange={handleFileChosen}/>
             </form>
             {
-                isCropping && 
-                <ImageCropper profilePicture={user.info.profilePicture}/>
+                imageUrl && 
+                <ImageCropper chosenImg={image} imageUrl={imageUrl} dispatch={dispatch}/>
             }
         </div>
     )
