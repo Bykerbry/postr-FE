@@ -1,0 +1,12 @@
+@import '../base/settings';
+
+.voteContainer {
+    display: inline-flex;
+    align-items: center;
+    margin-left: $l;
+}
+
+.voteIcon {
+    color: $pink;
+    font-size: $xxl;
+}

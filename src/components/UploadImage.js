@@ -12,9 +12,9 @@ const UploadImage = ({ dispatch }) => {
     const handleFileChosen = e => {
         const file = e.target.files[0]
         console.log(file)
-        if (file.size > 5000000) {
-            setError('Images must not exceed 5MB in size')
-        } else if(file.type !== 'image/jpeg' || file.type !== 'image/png') {
+        if (file.size > 1000000) {
+            setError('Images must not exceed 1MB in size')
+        } else if(file.type !== 'image/jpeg' && file.type !== 'image/png') {
             setError('Image must be of type .jpeg or .png')
         } else {
             const fileReader = new FileReader()

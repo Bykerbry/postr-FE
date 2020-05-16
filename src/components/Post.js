@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import Vote from './Vote'
 import deletePost from '../services/posts/deletePost'
 import updatePost from '../services/posts/updatePost'
-import { connect } from 'react-redux'
 import styles from '../styles/components/Post.module.scss'
 import formStyles from '../styles/components/Forms.module.scss'
 
@@ -93,9 +94,14 @@ const Post = ({ post, user, dispatch }) => {
                     </div>
                 </div>
                 :
-                <div className={styles.postContent}>
-                    <h3 onClick={handleEditing}>{post.title}</h3>
-                    <p onClick={handleEditing}>{post.body}</p>
+                <div>
+                    <div className={styles.postContent}>
+                        <h3 onClick={handleEditing}>{post.title}</h3>
+                        <p onClick={handleEditing}>{post.body}</p>
+                    </div>
+                    <div>
+                        <Vote id={post._id} votes={post.votes} isUserPost={isUserPost} dispatch={dispatch}/>
+                    </div>
                 </div>
             }
             {
