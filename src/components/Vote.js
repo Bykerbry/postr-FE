@@ -1,6 +1,5 @@
 import React from 'react'
-import upVotePost from '../services/posts/upVotePost'
-import downVotePost from '../services/posts/downVotePost'
+import votePost from '../services/posts/votePost'
 import styles from '../styles/components/Votes.module.scss'
 
 const Vote = ({postId, userId, votes, isUserPost, dispatch}) => {
@@ -11,12 +10,16 @@ const Vote = ({postId, userId, votes, isUserPost, dispatch}) => {
 
     const handleUpVote = () => {
         if (!isUserPost && !hasPreviouslyVoted) {
-            upVotePost(postId, dispatch)
+            votePost('cast', 'up', postId, dispatch)
+        } else if (!isUserPost && hasPreviouslyUpVoted) {
+            votePost('remove', 'up', postId, dispatch)
         }
     }
     const handleDownVote = () => {
         if (!isUserPost && !hasPreviouslyVoted) {
-            downVotePost(postId, dispatch)
+            votePost('cast','down', postId, dispatch)
+        } else if (!isUserPost && hasPreviouslyDownVoted) {
+            votePost('remove','down', postId, dispatch)
         }
     }
     return (

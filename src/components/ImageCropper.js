@@ -49,11 +49,15 @@ class ImageCropper extends React.Component {
     }
     render() {
         return (
-            <form className={styles.imgContainer} ref={this.imgContainer} onSubmit={this.handleSubmit}>
-                <img className={styles.img} ref={this.imgRef} alt='preview' src={this.props.imageUrl}/>
-                {this.state.croppedImgUrl && <img className={styles.preview} src={this.state.croppedImgUrl} alt='preview' />}
-                <button>Make Profile Picture</button>
-            </form>
+            <div className={styles.container}>
+                <form className={styles.imgContainer} ref={this.imgContainer} onSubmit={this.handleSubmit}>
+                    <img className={styles.img} ref={this.imgRef} alt='preview' src={this.props.imageUrl}/>
+                    <button type='submit'>Make Profile Picture</button>
+                </form>
+                <div>
+                    {this.state.croppedImgUrl && <img className={styles.preview} src={this.state.croppedImgUrl} alt='preview' />}
+                </div>
+            </div>
         )
     }
 }

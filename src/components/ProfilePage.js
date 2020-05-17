@@ -33,15 +33,19 @@ export class ProfilePage extends Component {
         return (
             <div>
                 <h1 className={styles.welcome}>Welcome {user.info.firstName}!</h1>
-                {user.info.profilePicture ? (
+                {
+                    user.info.profilePicture 
+                    ? 
                     <img className={styles.profilePicture} src={`http://localhost:8080/${user.info.profilePicture}`} alt='profile'/>
-                ) : (
-                    <div>
-                        <img className={styles.profilePicture} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
-                        <p>Add a Profile Picture</p>
-                        <UploadImage />
-                    </div>
-                )}
+                    : 
+                    (
+                        <div>
+                            <img className={styles.profilePicture} src='https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' alt='default profile' />
+                            <p className={styles.welcome}>Add a Profile Picture</p>
+                            <UploadImage />
+                        </div>
+                    )
+                }
                 <div className={styles.updateAndCreate}>
                     <Link className={styles.update} to='/update'>Update Profile</Link>
                     <button className={styles.create} onClick={this.handleClick}>Create Post</button>

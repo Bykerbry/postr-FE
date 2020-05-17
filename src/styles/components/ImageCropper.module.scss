@@ -1,5 +1,13 @@
 @import '../base/settings';
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: $l
+}
+
 .imgContainer {
     width: 250px;
     height: 250px;
@@ -15,4 +23,5 @@
 .preview {
     width: 200px;
     height: 200px;
+    margin: $l 0 $l $l;
 }
