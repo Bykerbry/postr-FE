@@ -6,7 +6,14 @@
     margin-left: $l;
 }
 
-.voteIcon {
-    color: $pink;
+.voteContainer > .material-icons {
     font-size: $xxl;
+}
+
+.voteIcon {
+    font-size: $xxl;
+}
+
+.hasVotedIcon {
+    color: $pink
 }

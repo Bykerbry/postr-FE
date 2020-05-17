@@ -100,7 +100,12 @@ const Post = ({ post, user, dispatch }) => {
                         <p onClick={handleEditing}>{post.body}</p>
                     </div>
                     <div>
-                        <Vote id={post._id} votes={post.votes} isUserPost={isUserPost} dispatch={dispatch}/>
+                        <Vote 
+                            postId={post._id}
+                            userId={user.info._id} 
+                            votes={post.votes} 
+                            isUserPost={isUserPost} 
+                            dispatch={dispatch}/>
                     </div>
                 </div>
             }
