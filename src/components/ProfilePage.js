@@ -8,7 +8,6 @@ import UploadImage from './UploadImage'
 import styles from '../styles/components/ProfilePage.module.scss'
 
 
-
 export class ProfilePage extends Component {
     constructor(props) {
         super(props)
@@ -26,6 +25,9 @@ export class ProfilePage extends Component {
             body: e.target.body.value
         }
         createPost(this.props, postData)
+        this.setState({isModalOpen: false})
+    }
+    handleCancelCreatePost = () => {
         this.setState({isModalOpen: false})
     }
     render() {
@@ -52,6 +54,7 @@ export class ProfilePage extends Component {
                 </div>
                 <CreatePostModal
                     handleCreatePost={this.handleCreatePost}
+                    handleCancelCreatePost={this.handleCancelCreatePost}
                     isModalOpen={this.state.isModalOpen}
                 />
                 {

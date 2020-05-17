@@ -1,0 +1,40 @@
+@import '../base/settings';
+
+.modal {
+    background-color: $darkGrey;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $xxl;
+    border-radius: $xs;
+    position: relative;
+}
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #FCFAF950;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.closeModalBtn {
+    position: absolute;
+    top: $m;
+    right: $m;
+    transition: transform .15s ease-in-out;
+}
+
+.closeModalBtn:hover {
+    transform: rotate(90deg);
+}

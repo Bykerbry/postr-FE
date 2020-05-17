@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Modal from "react-modal";
+import styles from '../styles/components/CreatePostModal.module.scss'
+import formStyles from '../styles/components/Forms.module.scss'
+
 
 Modal.setAppElement("#root");
 
@@ -23,10 +26,14 @@ export class CreatePostModal extends Component {
         return (
             <Modal
                 isOpen={this.props.isModalOpen}
+                onRequestClose={this.props.handleCancelCreatePost}
                 contentLabel='Create Post Form'
+                className={styles.modal}
+                overlayClassName={styles.overlay}
             >
-                <form onSubmit={this.props.handleCreatePost}>
-                    <div>
+                <h2>Create Post</h2>
+                <form onSubmit={this.props.handleCreatePost} className={styles.form}>
+                    <div className={formStyles.inputContainer}>
                         <label htmlFor='title'>Title</label>
                         <input 
                             type='text' 
@@ -34,18 +41,19 @@ export class CreatePostModal extends Component {
                             onChange={this.handleChange}    
                         />
                     </div>
-                    <div>
+                    <div className={formStyles.inputContainer}>
                         <label htmlFor='body'>Content</label>
                         <textarea
                             cols='30'
                             rows='10'
                             name='body'
                             onChange={this.handleChange}    
-                        ></textarea>
-                        
+                        >
+                        </textarea>
                     </div>
-                    <button>Add Post</button>
+                    <button className={formStyles.centeredBtn}>Add Post</button>
                 </form>
+                <span onClick={this.props.handleCancelCreatePost} className={`material-icons ${styles.closeModalBtn}`}>close</span>
             </Modal>
         )
     }
