@@ -30,6 +30,7 @@ export class CreatePostModal extends Component {
                 contentLabel='Create Post Form'
                 className={styles.modal}
                 overlayClassName={styles.overlay}
+                closeTimeoutMS={250}
             >
                 <h2>Create Post</h2>
                 <form onSubmit={this.props.handleCreatePost} className={styles.form}>

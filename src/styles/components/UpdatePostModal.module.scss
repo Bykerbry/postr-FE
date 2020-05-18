@@ -1,0 +1,12 @@
+@import '../base/settings';
+
+.btnContainer {
+    display: flex;
+    margin-top: $l;
+    justify-content: space-between;
+}
+
+.deleteBtn {
+    padding: 0 $s;
+
+}
