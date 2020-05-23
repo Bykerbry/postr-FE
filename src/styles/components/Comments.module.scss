@@ -1,0 +1,7 @@
+@import '../base/settings';
+
+.comment {
+    margin-left: $l;
+    padding-left: $l;
+    border-left: 4px solid $black;
+}

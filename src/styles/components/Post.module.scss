@@ -32,21 +32,10 @@
     margin: 0 $l;
 }
 
-.btnContainer {
+.postFooterContainer {
     display: flex;
-    flex-wrap: wrap;
-    margin-top: $s;
 }
 
-.updateBtn {
-    margin-right: $s;
-}
-
-.deleteBtn {
-    padding: $xs;
-    margin-left: $s;
-}
-
-#deleteIcon {
-    font-size: $xl;
+.addCommentBtn {
+    margin: 0 0 $l $l;
 }

@@ -1,14 +1,18 @@
 import React, {useState} from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import Vote from './Vote'
-import styles from '../styles/components/Post.module.scss'
+import Comment from './Comment'
 import UpdatePostModal from './UpdatePostModal'
+import CreateCommentModal from './CreateCommentModal'
+import PostFooter from './PostFooter'
+import styles from '../styles/components/Post.module.scss'
 
 
 const Post = ({ post, user, dispatch }) => {
     const isUserPost = post.creator._id === user.info._id
-    const [ isModalOpen, setIsModalOpen ] = useState(false)
+    const [isUpdatePostModalOpen, setIsUpdatePostModalOpen] = useState(false)
+    const [isCreateCommentModalOpen, setIsCreateCommentModalOpen] = useState(false)
+    const [showComments, setShowCommetns] = useState(false)
 
     const format = (createdAt) => {
         const created    = moment(createdAt)
@@ -26,13 +30,22 @@ const Post = ({ post, user, dispatch }) => {
         return created.format('ddd, MMM D, h:mm a')
     }
 
-    const handleOpenModal = () => {
+    const handleOpenUpdatePostModal = () => {
         if (isUserPost) {
-            setIsModalOpen(true)
+            setIsUpdatePostModalOpen(true)
         } 
     }
-    const handleCloseModal = () => {
-        setIsModalOpen(false)
+    const handleCloseUpdatePostModal = () => {
+        setIsUpdatePostModalOpen(false)
+    }
+    const handleShowComments = () => {
+        showComments ? setShowCommetns(false) : setShowCommetns(true)
+    }
+    const handleOpenCreateCommentModal = () => {
+        setIsCreateCommentModalOpen(true)
+    }
+    const handleCloseCreateCommentModal = () => {
+        setIsCreateCommentModalOpen(false)
     }
 
     return (
@@ -60,25 +73,48 @@ const Post = ({ post, user, dispatch }) => {
 
             <UpdatePostModal 
                 dispatch={dispatch}
-                handleCloseModal={handleCloseModal}
+                handleCloseModal={handleCloseUpdatePostModal}
                 title={post.title}
                 body={post.body}
                 postId={post._id}
-                isModalOpen={isModalOpen}
+                isModalOpen={isUpdatePostModalOpen}
             />
             <div>
                 <div className={styles.postContent}>
-                    <h3 onClick={handleOpenModal}>{post.title}</h3>
-                    <p onClick={handleOpenModal}>{post.body}</p>
+                    <h3 onClick={handleOpenUpdatePostModal}>{post.title}</h3>
+                    <p onClick={handleOpenUpdatePostModal}>{post.body}</p>
                 </div>
-                <div>
-                    <Vote 
+                <div className={styles.postFooterContainer}>
+                    <PostFooter 
                         postId={post._id}
                         userId={user.info._id} 
                         votes={post.votes} 
+                        comments={post.comments.length}
                         isUserPost={isUserPost} 
-                        dispatch={dispatch}/>
+                        handleShowComments={handleShowComments}
+                        dispatch={dispatch}
+                    />
                 </div>
+                {
+                    showComments &&
+                    <div>
+                        {
+                            post.comments.map(comment => {
+                                return <Comment 
+                                            key={comment._id}
+                                            comment={comment.comment}
+                                        />
+                            })                          
+                        }
+                        <button className={styles.addCommentBtn} onClick={handleOpenCreateCommentModal}>Add Comment</button>
+                        <CreateCommentModal 
+                            postId={post._id}
+                            isModalOpen={isCreateCommentModalOpen}
+                            dispatch={dispatch}
+                            handleCloseCreateCommentModal={handleCloseCreateCommentModal}
+                        />
+                    </div>
+                }
             </div>
         </div>
     )

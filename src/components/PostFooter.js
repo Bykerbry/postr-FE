@@ -1,8 +1,8 @@
 import React from 'react'
 import votePost from '../services/posts/votePost'
-import styles from '../styles/components/Votes.module.scss'
+import styles from '../styles/components/PostFooter.module.scss'
 
-const Vote = ({postId, userId, votes, isUserPost, dispatch}) => {
+const PostFooter = ({postId, userId, votes, comments, isUserPost, handleShowComments, dispatch}) => {
 
     const hasPreviouslyUpVoted = votes.up.voters.find(voter => voter._id === userId)
     const hasPreviouslyDownVoted = votes.down.voters.find(voter => voter._id === userId)
@@ -23,7 +23,7 @@ const Vote = ({postId, userId, votes, isUserPost, dispatch}) => {
         }
     }
     return (
-        <div>
+        <div className={styles.componentContainer}>
             <div className={styles.voteContainer} onClick={handleUpVote} >
                 <span className={`material-icons ${styles.voteIcon} ${hasPreviouslyUpVoted && styles.hasVotedIcon}`}>expand_less</span>
                 <span>{votes.up.count}</span>
@@ -32,8 +32,12 @@ const Vote = ({postId, userId, votes, isUserPost, dispatch}) => {
                 <span className={`material-icons ${styles.voteIcon} ${hasPreviouslyDownVoted && styles.hasVotedIcon}`}>expand_more</span>
                 <span>{votes.down.count}</span>
             </div>
+            <div className={styles.voteContainer} onClick={handleShowComments}>
+                <span className="material-icons">chat</span>
+                <span className={styles.commentCount}>{comments}</span>
+            </div>
         </div>
     )
 }
 
-export default Vote
+export default PostFooter

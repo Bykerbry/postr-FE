@@ -1,5 +1,9 @@
 @import '../base/settings';
 
+.componentContainer {
+    display: inline-flex;
+}
+
 .voteContainer {
     display: inline-flex;
     align-items: center;
@@ -17,4 +21,9 @@
 
 .hasVotedIcon {
     color: $pink
+}
+
+.commentCount {
+    margin-left: 6px;
+    margin-bottom: 1px;
 }
