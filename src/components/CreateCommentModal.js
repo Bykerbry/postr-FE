@@ -32,7 +32,7 @@ const CreateCommentModal = ({postId, isModalOpen, dispatch, handleCloseCreateCom
         >
             <h2>Add Comment</h2>
             <div className={formStyles.inputContainer}>
-                <label htmlFor='body'>Content</label>
+                <label htmlFor='body'>Comment</label>
                 <textarea
                     cols='30'
                     rows='10'

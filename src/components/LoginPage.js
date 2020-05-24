@@ -54,7 +54,7 @@ export class LoginPage extends Component {
                         />
                     </div>
                     {this.props.error.error && <p>{this.props.error.error}</p>}
-                    <button className={styles.loginBtn}>Login</button>
+                    <button className={styles.marginTopBtn}>Login</button>
                     <p>OR</p>
                     <Link to="/create-account">Create Account</Link>
                 </form>

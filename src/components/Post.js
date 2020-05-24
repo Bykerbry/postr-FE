@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Comment from './Comment'
 import UpdatePostModal from './UpdatePostModal'
 import CreateCommentModal from './CreateCommentModal'
-import PostFooter from './PostFooter'
+import ContentFooter from './ContentFooter'
 import styles from '../styles/components/Post.module.scss'
 
 
@@ -85,14 +85,13 @@ const Post = ({ post, user, dispatch }) => {
                     <p onClick={handleOpenUpdatePostModal}>{post.body}</p>
                 </div>
                 <div className={styles.postFooterContainer}>
-                    <PostFooter 
-                        postId={post._id}
-                        userId={user.info._id} 
+                    <ContentFooter 
+                        contentId={post._id}
                         votes={post.votes} 
                         comments={post.comments.length}
-                        isUserPost={isUserPost} 
+                        isPost={true}
+                        isUserContent={isUserPost} 
                         handleShowComments={handleShowComments}
-                        dispatch={dispatch}
                     />
                 </div>
                 {
@@ -102,11 +101,20 @@ const Post = ({ post, user, dispatch }) => {
                             post.comments.map(comment => {
                                 return <Comment 
                                             key={comment._id}
-                                            comment={comment.comment}
+                                            commentId={comment._id}
+                                            userId={user.info._id}
+                                            dispatch={dispatch}
+                                            comment={comment}
+                                            format={format}
                                         />
                             })                          
                         }
-                        <button className={styles.addCommentBtn} onClick={handleOpenCreateCommentModal}>Add Comment</button>
+                        <button 
+                            className={styles.addCommentBtn} 
+                            onClick={handleOpenCreateCommentModal}
+                        >
+                            Add Comment
+                        </button>
                         <CreateCommentModal 
                             postId={post._id}
                             isModalOpen={isCreateCommentModalOpen}
