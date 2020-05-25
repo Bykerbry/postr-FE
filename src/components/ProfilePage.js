@@ -19,7 +19,6 @@ export class ProfilePage extends Component {
         this.setState({isModalOpen: true})
     }
     handleCreatePost = (e) => {
-        e.preventDefault()
         const postData = {
             title: e.target.title.value,
             body: e.target.body.value

@@ -14,7 +14,7 @@ const CreatePostModal = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (title || body) {
-            props.handleCreatePost()
+            props.handleCreatePost(e)
         } else {
             setError('Please include the content you wish to post.')
         }
