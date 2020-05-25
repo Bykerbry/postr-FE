@@ -16,11 +16,15 @@
 }
 
 .form {
-    flex: 1;
+    width: 200px;
 }
 
 .pageTitle {
     margin-top: 0;
+}
+
+.createAccountTitle{
+    margin-top: $xxl;
 }
 
 .input {

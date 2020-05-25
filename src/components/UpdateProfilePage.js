@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { removeError } from '../actions/errorActions'
 import updateUser from '../services/users/updateUser'
 import UploadImage from './UploadImage'
-// import styles from '../styles/components/UpdateProfilePage.module.scss'
 import styles from '../styles/components/Forms.module.scss'
 
 
@@ -25,12 +24,15 @@ const UpdateProfilePage = (props) => {
             dispatch(removeError())
         }
     }
+    useEffect(() => {
+        dispatch(removeError())
+    }, [dispatch])
 
     return (
         <div className={styles.updateContainer}>
             <h1>Update Profile</h1>
             <h3>Update Your Account Information</h3>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="firstName">First Name</label>
                     <input 

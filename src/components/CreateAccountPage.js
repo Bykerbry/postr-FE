@@ -27,10 +27,10 @@ const CreateAccountPage = (props) => {
         dispatch(removeError())
     }, [dispatch])
 
-    return (
-        <div className={styles.container}>
-            <h2 className={styles.pageTitle}>Create Account</h2>        
-            <form onSubmit={handleSubmit(onSubmit)}>
+    return (       
+        <div className={styles.updateContainer}>
+            <h2 className={styles.createAccountTitle}>Create Account</h2>        
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="firstName">First Name</label>
                     <input 

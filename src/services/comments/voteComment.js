@@ -11,4 +11,6 @@ const voteComment = (action, target, id, dispatch) => {
         })
 }
 
+// Login duplicate emails should not be permitted on BE
+
 export default voteComment

@@ -16,8 +16,16 @@ const updateUser = (updates, dispatch) => {
                         message: 'Please enter a valid email address'
                     }
                 }))
+            } else if (error.response.data.error.startsWith('E11000 duplicate key error collection')) {
+                return dispatch(setError({
+                    email: {
+                        attempt: updates.email,
+                        message: 'An account associated with that email address already exists.'
+                    }
+                }))
             }
             console.log(error.response)
+            console.log(error)
         })
 }
 
