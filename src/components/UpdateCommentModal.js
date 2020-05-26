@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import Modal from 'react-modal'
-import formStyles from '../styles/components/Forms.module.scss'
-import modalStyles from '../styles/components/CreatePostModal.module.scss'
 import { connect } from 'react-redux'
-import updateComment from '../services/comments/updateComment'
 import deleteComment from '../services/comments/deleteComment'
+import updateComment from '../services/comments/updateComment'
+import formStyles from '../styles/components/Forms.module.scss'
+import modalStyles from '../styles/components/Modal.module.scss'
+
 
 const UpdateCommentModal = ({isModalOpen, commentText, commentId, handleCloseModal, dispatch}) => {
     const [comment, setComment] = useState(commentText)
@@ -37,22 +38,29 @@ const UpdateCommentModal = ({isModalOpen, commentText, commentId, handleCloseMod
             closeTimeoutMS={250}
         >
             <h2>Update Comment</h2>
-            <div className={formStyles.inputContainer}>
-                <label htmlFor='body'>Comment</label>
-                <textarea
-                    cols='30'
-                    rows='10'
-                    name='body'
-                    value={comment}
-                    onChange={handleChange}    
-                >
-                </textarea>
+            <div className={modalStyles.form}>
+                <div className={formStyles.inputContainer}>
+                    <label htmlFor='body'>Comment</label>
+                    <textarea
+                        cols='30'
+                        rows='10'
+                        name='body'
+                        value={comment}
+                        onChange={handleChange}    
+                    >
+                    </textarea>
+                </div>
+                { error && <p>{error}</p>}
+                <div className={modalStyles.btnContainer}>
+                    <div>
+                        <button onClick={handleUpdateComment}>Update</button>
+                        <button onClick={handleCloseModal}>Cancel</button>
+                    </div>
+                    <button className={modalStyles.deleteBtn} onClick={handleDeleteComment}>
+                        <span className='material-icons'> delete_forever </span>
+                    </button>
+                </div>
             </div>
-            { error && <p>{error}</p>}
-            <button className={formStyles.marginTopBtn} onClick={handleUpdateComment}>Update Comment</button>
-            <button onClick={handleDeleteComment}>
-                <span className="material-icons"> delete_forever </span>
-            </button>
             <span onClick={handleCloseModal} className={`material-icons ${modalStyles.closeModalBtn}`}>close</span>
 
         </Modal>

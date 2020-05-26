@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Modal from "react-modal";
-import styles from '../styles/components/CreatePostModal.module.scss'
+import styles from '../styles/components/Modal.module.scss'
 import formStyles from '../styles/components/Forms.module.scss'
 
 

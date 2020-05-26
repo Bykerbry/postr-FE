@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import Modal from "react-modal";
 import deletePost from '../services/posts/deletePost'
 import updatePost from '../services/posts/updatePost'
-import styles from '../styles/components/UpdatePostModal.module.scss'
-import modalStyles from '../styles/components/CreatePostModal.module.scss'
+import modalStyles from '../styles/components/Modal.module.scss'
 import formStyles from '../styles/components/Forms.module.scss'
 
 
@@ -29,7 +28,7 @@ const UpdatePostModal = (props) => {
     return (
         <Modal
             isOpen={props.isModalOpen}
-            onRequestClose={props.handleDontUpdate}
+            onRequestClose={handleCancelUpdate}
             className={modalStyles.modal}
             overlayClassName={modalStyles.overlay}
             closeTimeoutMS={250}
@@ -58,16 +57,17 @@ const UpdatePostModal = (props) => {
                     >
                     </textarea>
                 </div>
-                <div className={styles.btnContainer}>
-                    <div className={styles.btnLeft}>
+                <div className={modalStyles.btnContainer}>
+                    <div>
                         <button onClick={handleUpdatePost}> Update </button>
                         <button onClick={handleCancelUpdate}> Cancel </button>
                     </div>
-                    <button className={styles.deleteBtn} onClick={handleDeletePost}>
-                        <span className="material-icons" id={styles.deleteIcon}> delete_forever </span>
+                    <button className={modalStyles.deleteBtn} onClick={handleDeletePost}>
+                        <span className="material-icons"> delete_forever </span>
                     </button>
                 </div>
             </div>
+            <span onClick={handleCancelUpdate} className={`material-icons ${modalStyles.closeModalBtn}`}>close</span>
         </Modal>
     )
 }

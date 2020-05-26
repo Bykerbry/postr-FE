@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Modal from 'react-modal'
 import createComment from '../services/comments/createComment.js'
-import modalStyles from '../styles/components/CreatePostModal.module.scss'
+import modalStyles from '../styles/components/Modal.module.scss'
 import formStyles from '../styles/components/Forms.module.scss'
 
 const CreateCommentModal = ({postId, isModalOpen, dispatch, handleCloseCreateCommentModal}) => {
